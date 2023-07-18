@@ -8,11 +8,19 @@ import matplotlib.pyplot as plt
 from dataloader.MS2_dataset import DataLoader_MS2
 from utils.utils import visualize_disp_as_numpy, visualize_depth_as_numpy, Raw2Celsius
 
+# def parse_args():
+#     parser = ArgumentParser()
+#     parser.add_argument('--dataset_dir' , type=str, default='./MS2dataset')
+#     parser.add_argument('--modality', type=str, default='rgb', help='sensor modality: [rgb, nir ,thr]')
+#     parser.add_argument('--seq_name', type=str, default='_2021-08-06-10-59-33', help='sequence name')
+#     parser.add_argument('--data_format', type=str, default='MonoDepth', help='[MonoDepth, StereoMatch, MultiViewImg]')
+#     return parser.parse_args()
+
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument('--dataset_dir' , type=str, default='./MS2dataset')
+    parser.add_argument('--dataset_dir' , type=str, default='/mnt_2/Datasets/MS2')
     parser.add_argument('--modality', type=str, default='rgb', help='sensor modality: [rgb, nir ,thr]')
-    parser.add_argument('--seq_name', type=str, default='_2021-08-06-10-59-33', help='sequence name')
+    parser.add_argument('--seq_name', type=str, default='_2021-08-06-11-37-46', help='sequence name')
     parser.add_argument('--data_format', type=str, default='MonoDepth', help='[MonoDepth, StereoMatch, MultiViewImg]')
     return parser.parse_args()
 

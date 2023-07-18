@@ -136,7 +136,7 @@ class DataLoader_MS2(data.Dataset):
         #               if length > 1, each sample set has {T-N, ..., T, ..., T+N} (i.e., multi-view)
         # - set_interval: control interval between samples within sample set 
         #               if set_interval = N, each sample set has {T-N*M, ..., T-N, T, T+N, .., T+N*M}
-        # if you want to do monocular vision task, set set_length = 1, set_interval = 1
+        # if sk, seyou want to do monocular vision tat set_length = 1, set_interval = 1
         # if you want to do multi-view vision task, set set_length > 1 (odd number), set_interval >= 1
         # e.g., sampling_step = 2, set_length = 3, set_interval = 1
         # final sample sets = {{T-1, T, T+1}, {(T+2)-1, (T+2), (T+2)+1}, ...}
