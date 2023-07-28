@@ -12,6 +12,9 @@ def parse_args():
     parser.add_argument('--thr_png_pth', type=str,
                         help='path to thermal_image',
                         default='/mnt_2/Datasets/MS2/sync_data/_2021-08-06-16-19-00/thr/img_left')
+    parser.add_argument('--bit_folder_pth', type=str,
+                        help="path to 16 bit image",
+                        default='/mnt_2/Depth_result/Adabin/kitti_eigen_pred_raw')
 
 
     return parser.parse_args()
@@ -76,8 +79,37 @@ def npy_to_jpg_monodepth_2(args, normalize_follow_author = True):
         
         save_numpy_as_image(thr_img, thr_out_pth)
 
+def bit_to_png(args, colorize = True):
+    output_pth = args.bit_folder_pth.replace('raw', 'processed')
+
+    if not os.path.exists(output_pth):
+        print('Since output path does not exist, make output folder')
+        os.makedirs(output_pth)
+        # os.makedirs(os.path.join(output_pth, args.model_type))
+    
+    file_names = os.listdir(args.bit_folder_pth)
+    for index in range(len(file_names)):
+        thr_img_pth = os.path.join(args.bit_folder_pth, file_names[index])
+        thr_out_pth = os.path.join(output_pth, file_names[index])
+        thr_img = load_as_float_img(thr_img_pth)
+
+        if colorize == True:
+            thr_img = 1/thr_img
+            thr_img = np.squeeze(thr_img, 2)
+            vmax = np.percentile(thr_img, 95)
+            normalizer = mpl.colors.Normalize(vmin=thr_img.min(), vmax=vmax)
+            mapper = cm.ScalarMappable(norm=normalizer, cmap='magma')
+            colormapped_im = (mapper.to_rgba(thr_img)[:, :, :3] * 255).astype(np.uint8)
+            im = pil.fromarray(colormapped_im)
+            im.save(thr_out_pth)
+        
+        else:
+            thr_img/=65536
+            save_numpy_as_image(thr_img, thr_out_pth)
+
 
 
 if __name__ == '__main__':
     args=parse_args()
-    npy_to_jpg_monodepth_2(args)
+    # npy_to_jpg_monodepth_2(args)
+    bit_to_png(args)

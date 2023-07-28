@@ -41,6 +41,7 @@ import matplotlib.pyplot as plt
 from utils.utils import visualize_disp_as_numpy, visualize_depth_as_numpy, Raw2Celsius, load_as_float_img, load_as_float_depth
 import numpy as np
 import os
+from thr_2_jpg import normalize_zeroone, get_hist_range_and_normalize
 
 class ClickVisual:
     def __init__(self, fig, img):
@@ -57,9 +58,14 @@ class ClickVisual:
             pixel_value = self.img[y, x]
             print("Pixel Value at Click Location:", pixel_value)
 
-def visualize_value_image(img_pth, index):
+def visualize_value_image(img_pth, index, normalize=False):
     img_pth = os.path.join(img_pth,f'{index:06}.png')
     img = load_as_float_img(img_pth)
+
+    if normalize:
+        img = get_hist_range_and_normalize(img)
+        img = normalize_zeroone(img)
+        img*= 255
 
     fig, ax = plt.subplots()
     ax.imshow(np.uint8(img))
@@ -118,4 +124,5 @@ def visualize_multiple_value():
 
 if __name__ == "__main__":
     img_pth = '/mnt_2/Datasets/MS2/sync_data/_2021-08-13-21-36-10/thr_normalized/img_left'
-    visualize_value_image(img_pth, 50)
+    img_pth = '/mnt_2/Datasets/MS2/sync_data/_2021-08-06-16-19-00/thr/img_left'
+    visualize_value_image(img_pth, 400, normalize=True)
