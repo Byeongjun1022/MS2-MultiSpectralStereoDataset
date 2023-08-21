@@ -12,7 +12,8 @@ def plt_multi(cnt, *args):
         plt.imshow(args[i])
 
 def main(index):
-    seq_name = '/mnt_2/Datasets/MS2/sync_data/_2021-08-06-16-19-00/thr/img_left'
+    # seq_name = '/mnt_2/Datasets/MS2/sync_data/_2021-08-06-16-19-00/thr/img_left'
+    seq_name = '/mnt_2/Datasets/MS2/sync_data/_2021-08-13-22-03-03/thr/img_left'
     seq_name_rgb = seq_name.replace('thr', 'rgb')
     index = int(index)
     thr_img_pth = os.path.join(seq_name, f'{index:06}.png')
@@ -61,6 +62,6 @@ def main(index):
 
 
 if __name__ == "__main__":
-    main(400)
+    main(1600)
 
 # %%

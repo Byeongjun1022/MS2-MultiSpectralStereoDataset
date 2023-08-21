@@ -125,4 +125,5 @@ def visualize_multiple_value():
 if __name__ == "__main__":
     img_pth = '/mnt_2/Datasets/MS2/sync_data/_2021-08-13-21-36-10/thr_normalized/img_left'
     img_pth = '/mnt_2/Datasets/MS2/sync_data/_2021-08-06-16-19-00/thr/img_left'
-    visualize_value_image(img_pth, 400, normalize=True)
+    # visualize_value_image(img_pth, 400, normalize=True)
+    visualize_multiple_value()

@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 image_path = '/mnt_2/Datasets/MS2/'
-file_name = 'splits_bj/val_thr_with_gt.txt'
+file_name = 'splits_bj/train_thr_with_gt.txt'
 
 with open(file_name, 'r') as f:
     file_names = f.readlines()
